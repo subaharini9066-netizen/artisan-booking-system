@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artisan Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Registered Artisans</h2>
+
+<div id="profiles"></div>
+
+<h3>Book Service</h3>
+<form id="bookingForm">
+    <input type="text" id="customerName" placeholder="Customer Name" required><br><br>
+    <input type="date" id="date" required><br><br>
+    <button type="submit">Book</button>
+</form>
+
+<h3>QR Code</h3>
+<div id="qrcode"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+window.onload = function() {
+
+    const params = new URLSearchParams(window.location.search);
+    const artisanId = params.get("id");
+
+    let artisans = JSON.parse(localStorage.getItem("artisans")) || [];
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    let profileDiv = document.getElementById("profiles");
+
+    let artisan;
+
+if (artisanId) {
+    artisan = artisans.find(a => a.id == artisanId);
+} else {
+    artisan = artisans[artisans.length - 1]; // show last registered artisan
+}
+
+    if (artisan) {
+        profileDiv.innerHTML = `
+            <div class="card">
+                <h3>${artisan.name}</h3>
+                <p><b>Service:</b> ${artisan.service}</p>
+                <p><b>Phone:</b> ${artisan.phone}</p>
+                <p><b>Location:</b> ${artisan.location}</p>
+            </div>
+            <hr>
+        `;
+
+        QRCode.toCanvas(document.getElementById('qrcode'), window.location.href);
+    } else {
+        profileDiv.innerHTML = "<p>Artisan not found.</p>";
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const booking = {
+            artisanId: artisanId,
+            customer: document.getElementById("customerName").value,
+            date: document.getElementById("date").value
+        };
+
+        bookings.push(booking);
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+
+        alert("Booking Confirmed!");
+    });
+
+    let artisanBookings = bookings.filter(b => b.artisanId == artisanId);
+
+    if (artisanBookings.length > 0) {
+        profileDiv.innerHTML += "<h4>Bookings:</h4>";
+        artisanBookings.forEach(b => {
+            profileDiv.innerHTML += `
+                <p>Customer: ${b.customer} | Date: ${b.date}</p>
+            `;
+        });
+    }
+};
+</script>
+
+</body>
+</html>

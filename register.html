@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Artisan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Artisan Registration</h2>
+
+<form id="artisanForm">
+    <input type="text" id="name" placeholder="Name" required><br><br>
+    <input type="text" id="service" placeholder="Service Type" required><br><br>
+    <input type="text" id="phone" placeholder="Phone" required><br><br>
+    <input type="text" id="location" placeholder="Location" required><br><br>
+    <button type="submit">Register</button>
+</form>
+
+<script>
+window.onload = function() {
+    document.getElementById("artisanForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const id = Date.now();
+
+        const artisan = {
+            id: id,
+            name: document.getElementById("name").value,
+            service: document.getElementById("service").value,
+            phone: document.getElementById("phone").value,
+            location: document.getElementById("location").value
+        };
+
+        let artisans = JSON.parse(localStorage.getItem("artisans")) || [];
+        artisans.push(artisan);
+
+        localStorage.setItem("artisans", JSON.stringify(artisans));
+
+        alert("Registration Successful!");
+        window.location.href = "profile.html?id=" + id;
+    });
+};
+</script>
+
+</body>
+</html>

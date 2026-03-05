@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Book Artisan Service</title>
+</head>
+
+<body>
+
+<h2>Book Artisan Service</h2>
+
+<form id="bookingForm">
+
+<input type="text" id="customerName" placeholder="Your Name" required><br><br>
+
+<input type="text" id="customerPhone" placeholder="Your Phone Number" required><br><br>
+
+<input type="text" id="serviceNeeded" placeholder="Service Needed" required><br><br>
+
+<label>Select Date:</label><br>
+<input type="date" id="bookingDate" required><br><br>
+
+<label>Select Time:</label><br>
+<input type="time" id="bookingTime" required><br><br>
+
+<button type="submit">Book Service</button>
+
+</form>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const artisanId = urlParams.get("id");
+
+let artisans = JSON.parse(localStorage.getItem("artisans")) || [];
+const artisan = artisans.find(a => a.id == artisanId);
+
+let artisanPhone = artisan ? artisan.phone : "7010726534";
+
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name = document.getElementById("customerName").value;
+let phone = document.getElementById("customerPhone").value;
+let service = document.getElementById("serviceNeeded").value;
+let date = document.getElementById("bookingDate").value;
+let time = document.getElementById("bookingTime").value;
+
+let message =
+"New Booking Request%0A" +
+"Customer Name: " + name + "%0A" +
+"Phone: " + phone + "%0A" +
+"Service Needed: " + service + "%0A" +
+"Date: " + date + "%0A" +
+"Time: " + time;
+
+let whatsappURL = "https://wa.me/91" + artisanPhone + "?text=" + message;
+
+window.open(whatsappURL, "_blank");
+
+});
+
+</script>
+
+</body>
+</html>

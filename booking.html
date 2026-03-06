@@ -2,6 +2,40 @@
 <html>
 <head>
 <title>Book Artisan Service</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family: Arial;
+text-align:center;
+background:#f4f4f4;
+}
+
+form{
+background:white;
+padding:20px;
+margin:auto;
+width:300px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+
+input{
+width:90%;
+padding:8px;
+margin:5px;
+}
+
+button{
+background:green;
+color:white;
+padding:10px;
+border:none;
+width:95%;
+cursor:pointer;
+}
+</style>
+
 </head>
 
 <body>
@@ -10,32 +44,40 @@
 
 <form id="bookingForm">
 
-<input type="text" id="customerName" placeholder="Your Name" required><br><br>
+<input type="text" id="customerName" placeholder="Your Name" required><br>
 
-<input type="text" id="customerPhone" placeholder="Your Phone Number" required><br><br>
+<input type="text" id="customerPhone" placeholder="Your Phone Number" required><br>
 
-<input type="text" id="serviceNeeded" placeholder="Service Needed" required><br><br>
+<input type="text" id="serviceNeeded" placeholder="Service Needed" required><br>
 
-<label>Select Date:</label><br>
-<input type="date" id="bookingDate" required><br><br>
+<label>Select Date</label><br>
+<input type="date" id="bookingDate" required><br>
 
-<label>Select Time:</label><br>
+<label>Select Time</label><br>
 <input type="time" id="bookingTime" required><br><br>
 
 <button type="submit">Book Service</button>
 
 </form>
 
+
 <script>
 
+// Get artisan ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const artisanId = urlParams.get("id");
 
+// Get artisans from local storage
 let artisans = JSON.parse(localStorage.getItem("artisans")) || [];
+
+// Find artisan
 const artisan = artisans.find(a => a.id == artisanId);
 
+// Artisan phone fallback
 let artisanPhone = artisan ? artisan.phone : "7010726534";
 
+
+// Booking form submit
 document.getElementById("bookingForm").addEventListener("submit", function(e){
 
 e.preventDefault();
@@ -46,7 +88,9 @@ let service = document.getElementById("serviceNeeded").value;
 let date = document.getElementById("bookingDate").value;
 let time = document.getElementById("bookingTime").value;
 
-let message =
+
+// Message to artisan
+let artisanMessage =
 "New Booking Request%0A" +
 "Customer Name: " + name + "%0A" +
 "Phone: " + phone + "%0A" +
@@ -54,9 +98,28 @@ let message =
 "Date: " + date + "%0A" +
 "Time: " + time;
 
-let whatsappURL = "https://wa.me/91" + artisanPhone + "?text=" + message;
 
-window.open(whatsappURL, "_blank");
+// Message to customer
+let customerMessage =
+"Booking Confirmed%0A" +
+"Service: " + service + "%0A" +
+"Date: " + date + "%0A" +
+"Time: " + time + "%0A" +
+"Your artisan will contact you soon.";
+
+
+// WhatsApp links
+let artisanWhatsApp = "https://wa.me/91" + artisanPhone + "?text=" + artisanMessage;
+let customerWhatsApp = "https://wa.me/91" + phone + "?text=" + customerMessage;
+
+
+// Open artisan WhatsApp
+window.open(artisanWhatsApp, "_blank");
+
+// Open customer WhatsApp after 2 seconds
+setTimeout(function(){
+window.open(customerWhatsApp, "_blank");
+},2000);
 
 });
 

@@ -34,6 +34,7 @@ cursor:pointer;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -44,7 +45,7 @@ cursor:pointer;
 
 <input id="name" placeholder="Customer Name">
 
-<input id="phone" placeholder="Phone Number">
+<input id="phone" placeholder="Customer Phone">
 
 <select id="service">
 
@@ -73,11 +74,14 @@ cursor:pointer;
 const params=new URLSearchParams(window.location.search)
 
 const service=params.get("service")
+const artisan=params.get("artisan")
 
 if(service){
-
 document.getElementById("service").value=service
+}
 
+if(artisan){
+document.getElementById("artisanPhone").value=artisan
 }
 
 function saveBooking(){
@@ -99,7 +103,7 @@ bookings.push(booking)
 
 localStorage.setItem("bookings",JSON.stringify(bookings))
 
-alert("Booking Saved")
+alert("Booking Saved Successfully")
 
 }
 

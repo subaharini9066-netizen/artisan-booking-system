@@ -20,7 +20,7 @@ border-radius:10px;
 box-shadow:0px 0px 10px gray;
 }
 
-input{
+input, select{
 width:90%;
 padding:8px;
 margin:5px;
@@ -44,22 +44,28 @@ cursor:pointer;
 
 <form id="bookingForm">
 
-<input type="text" id="customerName" placeholder="Your Name" required><br>
+<input type="text" id="customerName" placeholder="Your Name" required>
 
-<input type="text" id="customerPhone" placeholder="Your Phone Number" required><br>
+<input type="tel" id="customerPhone" placeholder="Phone Number" required>
 
-<input type="text" id="serviceNeeded" placeholder="Service Needed" required><br>
+<label>Select Service</label>
+<select id="serviceNeeded" required>
+<option value="">Select Service</option>
+<option value="Electrician">Electrician</option>
+<option value="Plumber">Plumber</option>
+<option value="Carpenter">Carpenter</option>
+<option value="Painter">Painter</option>
+</select>
 
-<label>Select Date</label><br>
-<input type="date" id="bookingDate" required><br>
+<label>Select Date</label>
+<input type="date" id="bookingDate" required>
 
-<label>Select Time</label><br>
-<input type="time" id="bookingTime" required><br><br>
+<label>Select Time</label>
+<input type="time" id="bookingTime" required>
 
-<button type="submit">Book Service</button>
+<button type="submit">Book Now</button>
 
 </form>
-
 
 <script>
 
@@ -75,6 +81,13 @@ const artisan = artisans.find(a => a.id == artisanId);
 
 // Artisan phone fallback
 let artisanPhone = artisan ? artisan.phone : "7010726534";
+
+
+// Auto-select service from QR link
+const serviceParam = urlParams.get("service");
+if(serviceParam){
+document.getElementById("serviceNeeded").value = serviceParam;
+}
 
 
 // Booking form submit

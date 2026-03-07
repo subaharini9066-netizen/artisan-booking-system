@@ -5,31 +5,39 @@
 
 <style>
 body{
-font-family:Arial;
+font-family: Arial;
 background:#f4f4f4;
-text-align:center;
+padding:30px;
 }
 
-table{
+.container{
+max-width:700px;
 margin:auto;
-border-collapse:collapse;
-width:90%;
 background:white;
-}
-
-th,td{
-padding:10px;
-border:1px solid #ccc;
-}
-
-th{
-background:#0077ff;
-color:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 input{
-padding:8px;
-margin:10px;
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.booking{
+border:1px solid #ddd;
+padding:10px;
+margin-top:10px;
+border-radius:5px;
 }
 </style>
 
@@ -37,28 +45,17 @@ margin:10px;
 
 <body>
 
+<div class="container">
+
 <h2>Artisan Dashboard</h2>
 
-<p>Enter your phone number to see your bookings</p>
+<input type="text" id="artisanPhone" placeholder="Enter Your Phone Number">
 
-<input type="text" id="artisanPhone" placeholder="Enter your phone number">
+<button onclick="loadBookings()">Load My Bookings</button>
 
-<button onclick="loadBookings()">View My Bookings</button>
+<div id="bookingList"></div>
 
-<table>
-<thead>
-<tr>
-<th>Customer</th>
-<th>Phone</th>
-<th>Service</th>
-<th>Date</th>
-<th>Time</th>
-</tr>
-</thead>
-
-<tbody id="bookingTable"></tbody>
-
-</table>
+</div>
 
 <script>
 
@@ -68,27 +65,30 @@ let phone = document.getElementById("artisanPhone").value;
 
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-let table = document.getElementById("bookingTable");
+let result = bookings.filter(function(b){
+return b.artisanPhone === phone;
+});
 
-table.innerHTML="";
+let bookingList = document.getElementById("bookingList");
 
-bookings.forEach(b => {
+bookingList.innerHTML = "";
 
-if(b.artisanPhone === phone){
-
-let row = `
-<tr>
-<td>${b.customerName}</td>
-<td>${b.phone}</td>
-<td>${b.service}</td>
-<td>${b.date}</td>
-<td>${b.time}</td>
-</tr>
-`;
-
-table.innerHTML += row;
-
+if(result.length === 0){
+bookingList.innerHTML = "<p>No bookings found</p>";
+return;
 }
+
+result.forEach(function(b){
+
+bookingList.innerHTML += `
+<div class="booking">
+<p><b>Customer:</b> ${b.customerName}</p>
+<p><b>Phone:</b> ${b.phone}</p>
+<p><b>Service:</b> ${b.service}</p>
+<p><b>Date:</b> ${b.date}</p>
+<p><b>Time:</b> ${b.time}</p>
+</div>
+`;
 
 });
 

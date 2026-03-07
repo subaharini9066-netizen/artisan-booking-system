@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Available Artisans</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+padding:40px;
+}
+
+h1{
+text-align:center;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+width:220px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+button{
+background:#0077ff;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Available Artisans</h1>
+
+<div class="container" id="artisanList"></div>
+
+
+<script>
+
+let artisans = JSON.parse(localStorage.getItem("artisans")) || []
+
+let list = document.getElementById("artisanList")
+
+if(artisans.length===0){
+
+list.innerHTML="<p>No artisans registered yet</p>"
+
+}
+
+artisans.forEach(a=>{
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>${a.name}</h3>
+
+<p><b>Service:</b> ${a.service}</p>
+
+<p><b>Location:</b> ${a.location}</p>
+
+<p><b>Phone:</b> ${a.phone}</p>
+
+<a href="booking.html?artisan=${a.phone}">
+
+<button>Book Service</button>
+
+</a>
+
+</div>
+
+`
+
+})
+
+</script>
+
+</body>
+</html>

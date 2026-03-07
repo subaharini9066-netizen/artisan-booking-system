@@ -20,16 +20,16 @@ padding:30px;
 
 .services{
 display:flex;
+flex-wrap:wrap;
 justify-content:center;
 gap:20px;
-flex-wrap:wrap;
 margin:40px;
 }
 
 .card{
 background:white;
-border-radius:10px;
 padding:20px;
+border-radius:10px;
 width:200px;
 text-align:center;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
@@ -39,16 +39,25 @@ button{
 background:#0077ff;
 color:white;
 border:none;
-padding:10px 15px;
-border-radius:5px;
+padding:10px;
 cursor:pointer;
+border-radius:5px;
 }
 
-button:hover{
-background:#0055cc;
+.map-section{
+margin:40px;
+text-align:center;
+}
+
+iframe{
+width:90%;
+height:350px;
+border:0;
+border-radius:10px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -56,7 +65,16 @@ background:#0055cc;
 <header>
 
 <h1>Local Artisan Services</h1>
+
 <p>Book trusted artisans near you</p>
+
+<a href="register-artisan.html">
+<button>Join as Artisan</button>
+</a>
+
+<a href="artisan-dashboard.html">
+<button>Artisan Dashboard</button>
+</a>
 
 </header>
 
@@ -65,7 +83,7 @@ background:#0055cc;
 
 <div class="card">
 <h3>Electrical</h3>
-<p>Electrician Services</p>
+<p>Electrician</p>
 <a href="booking.html?service=Electrician">
 <button>Book Now</button>
 </a>
@@ -73,7 +91,7 @@ background:#0055cc;
 
 <div class="card">
 <h3>Plumbing</h3>
-<p>Plumber Services</p>
+<p>Plumber</p>
 <a href="booking.html?service=Plumber">
 <button>Book Now</button>
 </a>
@@ -81,7 +99,7 @@ background:#0055cc;
 
 <div class="card">
 <h3>Woodwork</h3>
-<p>Carpenter Services</p>
+<p>Carpenter</p>
 <a href="booking.html?service=Carpenter">
 <button>Book Now</button>
 </a>
@@ -89,7 +107,7 @@ background:#0055cc;
 
 <div class="card">
 <h3>Vehicle Repair</h3>
-<p>Mechanic Services</p>
+<p>Mechanic</p>
 <a href="booking.html?service=Mechanic">
 <button>Book Now</button>
 </a>
@@ -97,7 +115,7 @@ background:#0055cc;
 
 <div class="card">
 <h3>Home Painting</h3>
-<p>Painter Services</p>
+<p>Painter</p>
 <a href="booking.html?service=Painter">
 <button>Book Now</button>
 </a>
@@ -105,11 +123,24 @@ background:#0055cc;
 
 <div class="card">
 <h3>Cleaning</h3>
-<p>House Cleaning</p>
+<p>House Cleaner</p>
 <a href="booking.html?service=House Cleaner">
 <button>Book Now</button>
 </a>
 </div>
+
+</div>
+
+
+<div class="map-section">
+
+<h2>Find Services Near You</h2>
+
+<p>Search artisans in your area</p>
+
+<iframe
+src="https://www.google.com/maps?q=local+artisan+services&output=embed">
+</iframe>
 
 </div>
 

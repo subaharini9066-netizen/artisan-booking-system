@@ -7,7 +7,7 @@
 body{
 font-family: Arial;
 background:#f4f4f4;
-padding:30px;
+padding:40px;
 }
 
 .container{
@@ -15,8 +15,7 @@ max-width:700px;
 margin:auto;
 background:white;
 padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+border-radius:8px;
 }
 
 input{
@@ -37,7 +36,6 @@ cursor:pointer;
 border:1px solid #ddd;
 padding:10px;
 margin-top:10px;
-border-radius:5px;
 }
 </style>
 
@@ -49,7 +47,7 @@ border-radius:5px;
 
 <h2>Artisan Dashboard</h2>
 
-<input type="text" id="artisanPhone" placeholder="Enter Your Phone Number">
+<input id="artisanPhone" placeholder="Enter your phone number">
 
 <button onclick="loadBookings()">Load My Bookings</button>
 
@@ -65,22 +63,22 @@ let phone = document.getElementById("artisanPhone").value;
 
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-let result = bookings.filter(function(b){
+let filtered = bookings.filter(function(b){
 return b.artisanPhone === phone;
 });
 
-let bookingList = document.getElementById("bookingList");
+let container = document.getElementById("bookingList");
 
-bookingList.innerHTML = "";
+container.innerHTML = "";
 
-if(result.length === 0){
-bookingList.innerHTML = "<p>No bookings found</p>";
+if(filtered.length === 0){
+container.innerHTML = "<p>No bookings found</p>";
 return;
 }
 
-result.forEach(function(b){
+filtered.forEach(function(b){
 
-bookingList.innerHTML += `
+container.innerHTML += `
 <div class="booking">
 <p><b>Customer:</b> ${b.customerName}</p>
 <p><b>Phone:</b> ${b.phone}</p>

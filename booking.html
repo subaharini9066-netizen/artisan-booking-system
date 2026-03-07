@@ -1,140 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Book Artisan Service</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Service</title>
 
 <style>
+
 body{
-font-family: Arial;
-text-align:center;
+font-family:Arial;
 background:#f4f4f4;
+padding:40px;
 }
 
-form{
+.container{
 background:white;
-padding:20px;
+max-width:500px;
 margin:auto;
-width:300px;
+padding:20px;
 border-radius:10px;
-box-shadow:0px 0px 10px gray;
 }
 
-input, select{
-width:90%;
-padding:8px;
-margin:5px;
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
 }
 
 button{
-background:green;
+background:#0077ff;
 color:white;
-padding:10px;
 border:none;
-width:95%;
+padding:10px;
 cursor:pointer;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
-<h2>Book Artisan Service</h2>
+<div class="container">
 
-<form id="bookingForm">
+<h2>Book Service</h2>
 
-<input type="text" id="customerName" placeholder="Your Name" required>
+<input id="name" placeholder="Customer Name">
 
-<input type="tel" id="customerPhone" placeholder="Phone Number" required>
+<input id="phone" placeholder="Phone Number">
 
-<label>Select Service</label>
-<select id="serviceNeeded" required>
-<option value="">Select Service</option>
-<option value="Electrician">Electrician</option>
-<option value="Plumber">Plumber</option>
-<option value="Carpenter">Carpenter</option>
-<option value="Painter">Painter</option>
+<select id="service">
+
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Mechanic</option>
+<option>Painter</option>
+<option>House Cleaner</option>
+
 </select>
 
-<label>Select Date</label>
-<input type="date" id="bookingDate" required>
+<input type="date" id="date">
 
-<label>Select Time</label>
-<input type="time" id="bookingTime" required>
+<input type="time" id="time">
 
-<button type="submit">Book Now</button>
+<input id="artisanPhone" placeholder="Artisan Phone">
 
-</form>
+<button onclick="saveBooking()">Book Service</button>
+
+</div>
+
 
 <script>
 
-// Get artisan ID from URL
-const urlParams = new URLSearchParams(window.location.search);
-const artisanId = urlParams.get("id");
+const params=new URLSearchParams(window.location.search)
 
-// Get artisans from local storage
-let artisans = JSON.parse(localStorage.getItem("artisans")) || [];
+const service=params.get("service")
 
-// Find artisan
-const artisan = artisans.find(a => a.id == artisanId);
+if(service){
 
-// Artisan phone fallback
-let artisanPhone = artisan ? artisan.phone : "7010726534";
+document.getElementById("service").value=service
 
-
-// Auto-select service from QR link
-const serviceParam = urlParams.get("service");
-if(serviceParam){
-document.getElementById("serviceNeeded").value = serviceParam;
 }
 
+function saveBooking(){
 
-// Booking form submit
-document.getElementById("bookingForm").addEventListener("submit", function(e){
+let bookings=JSON.parse(localStorage.getItem("bookings"))||[]
 
-e.preventDefault();
+let booking={
 
-let name = document.getElementById("customerName").value;
-let phone = document.getElementById("customerPhone").value;
-let service = document.getElementById("serviceNeeded").value;
-let date = document.getElementById("bookingDate").value;
-let time = document.getElementById("bookingTime").value;
+customerName:document.getElementById("name").value,
+phone:document.getElementById("phone").value,
+service:document.getElementById("service").value,
+date:document.getElementById("date").value,
+time:document.getElementById("time").value,
+artisanPhone:document.getElementById("artisanPhone").value
 
+}
 
-// Message to artisan
-let artisanMessage =
-"New Booking Request%0A" +
-"Customer Name: " + name + "%0A" +
-"Phone: " + phone + "%0A" +
-"Service Needed: " + service + "%0A" +
-"Date: " + date + "%0A" +
-"Time: " + time;
+bookings.push(booking)
 
+localStorage.setItem("bookings",JSON.stringify(bookings))
 
-// Message to customer
-let customerMessage =
-"Booking Confirmed%0A" +
-"Service: " + service + "%0A" +
-"Date: " + date + "%0A" +
-"Time: " + time + "%0A" +
-"Your artisan will contact you soon.";
+alert("Booking Saved")
 
-
-// WhatsApp links
-let artisanWhatsApp = "https://wa.me/91" + artisanPhone + "?text=" + artisanMessage;
-let customerWhatsApp = "https://wa.me/91" + phone + "?text=" + customerMessage;
-
-
-// Open artisan WhatsApp
-window.open(artisanWhatsApp, "_blank");
-
-// Open customer WhatsApp after 2 seconds
-setTimeout(function(){
-window.open(customerWhatsApp, "_blank");
-},2000);
-
-});
+}
 
 </script>
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Artisan Dashboard</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Artisan Dashboard</h1>
+</header>
+
+<div class="container">
+
+<h2>Customer Booking History</h2>
+
+<table id="bookingTable">
+
+<tr>
+<th>Customer Name</th>
+<th>Phone</th>
+<th>Service</th>
+<th>Date</th>
+<th>Time</th>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+let table = document.getElementById("bookingTable");
+
+bookings.forEach(function(booking){
+
+let row = table.insertRow();
+
+row.insertCell(0).innerText = booking.name;
+row.insertCell(1).innerText = booking.phone;
+row.insertCell(2).innerText = booking.service;
+row.insertCell(3).innerText = booking.date;
+row.insertCell(4).innerText = booking.time;
+
+});
+
+</script>
+
+</body>
+</html>

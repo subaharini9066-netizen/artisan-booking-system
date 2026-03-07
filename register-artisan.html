@@ -33,6 +33,11 @@ padding:10px;
 cursor:pointer;
 }
 
+#qrSection{
+margin-top:20px;
+text-align:center;
+}
+
 </style>
 
 </head>
@@ -62,6 +67,8 @@ cursor:pointer;
 
 <button onclick="registerArtisan()">Register</button>
 
+<div id="qrSection"></div>
+
 </div>
 
 
@@ -69,15 +76,18 @@ cursor:pointer;
 
 function registerArtisan(){
 
-let artisans=JSON.parse(localStorage.getItem("artisans"))||[]
+let artisans = JSON.parse(localStorage.getItem("artisans")) || []
+
+let name=document.getElementById("name").value
+let service=document.getElementById("service").value
+let phone=document.getElementById("phone").value
+let location=document.getElementById("location").value
 
 let artisan={
-
-name:document.getElementById("name").value,
-service:document.getElementById("service").value,
-phone:document.getElementById("phone").value,
-location:document.getElementById("location").value
-
+name:name,
+service:service,
+phone:phone,
+location:location
 }
 
 artisans.push(artisan)
@@ -85,6 +95,30 @@ artisans.push(artisan)
 localStorage.setItem("artisans",JSON.stringify(artisans))
 
 alert("Registration Successful")
+
+generateQR(phone)
+
+}
+
+function generateQR(phone){
+
+let website="https://sprightly-paletas-a58eab.netlify.app"
+
+let bookingLink=website+"/booking.html?artisan="+phone
+
+let qrImage="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+bookingLink
+
+document.getElementById("qrSection").innerHTML=`
+
+<h3>Your Booking QR Code</h3>
+
+<p>Customers scan this to book your service</p>
+
+<img src="${qrImage}">
+
+<p>${bookingLink}</p>
+
+`
 
 }
 

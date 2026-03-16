@@ -1,228 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-<title>Local Artisan Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+<title>Artisan Booking System</title>
 
-body{
-font-family:Arial;
-margin:0;
-background:#f5f7fb;
-}
+<link rel="stylesheet" href="style.css">
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 50px;
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-.logo{
-font-size:22px;
-font-weight:bold;
-color:#2563eb;
-}
-
-nav a{
-margin-left:20px;
-text-decoration:none;
-color:#333;
-font-weight:bold;
-}
-
-.hero{
-text-align:center;
-padding:80px 20px;
-background:linear-gradient(135deg,#2563eb,#4f46e5);
-color:white;
-}
-
-.hero h1{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:18px;
-margin-bottom:30px;
-}
-
-.hero button{
-padding:12px 25px;
-border:none;
-background:white;
-color:#2563eb;
-font-weight:bold;
-border-radius:5px;
-cursor:pointer;
-}
-
-.services{
-padding:60px 40px;
-text-align:center;
-}
-
-.services h2{
-margin-bottom:40px;
-}
-
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:25px;
-}
-
-.card{
-background:white;
-padding:25px;
-width:220px;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card h3{
-margin-bottom:10px;
-}
-
-.card button{
-margin-top:10px;
-background:#2563eb;
-color:white;
-border:none;
-padding:8px 15px;
-border-radius:5px;
-cursor:pointer;
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#111;
-color:white;
-margin-top:60px;
-}
-
-</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<header>
 
-<div class="logo">ArtisanConnect</div>
+<header class="navbar">
+
+<div class="logo">
+<i class="fa-solid fa-screwdriver-wrench"></i>
+Artisan Booking System
+</div>
 
 <nav>
-<a href="artisans.html">Find Artisans</a>
-<a href="register-artisan.html">Join as Artisan</a>
-<a href="artisan-dashboard.html">Dashboard</a>
+
+<a class="active" href="#">Home</a>
+<a href="#">Artisans</a>
+<a href="#">Bookings</a>
+<a href="#">My Bookings</a>
+<a href="#">Login</a>
+<a href="#">Register</a>
+
+<button class="start-btn">Get Started</button>
+
 </nav>
 
 </header>
 
 
-<div class="hero">
 
-<h1>Book Trusted Local Artisans</h1>
+<section class="hero">
 
-<p>Electricians, Plumbers, Carpenters and more near you</p>
+<div class="hero-left">
 
-<a href="artisans.html">
-<button>Find Services</button>
-</a>
+<h1>
+Find & Book Trusted
+<span>Artisans Easily</span>
+</h1>
 
-</div>
+<p>
+Skilled professionals at your doorstep — Fast, Reliable & Affordable.
+</p>
 
+<button class="hero-btn">
+Book an Artisan →
+</button>
 
-<div class="services">
-
-<h2>Our Services</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Electrical</h3>
-<p>Electrician services</p>
-<a href="booking.html?service=Electrician">
-<button>Book</button>
-</a>
-</div>
-
-<div class="card">
-<h3>Plumbing</h3>
-<p>Professional plumbers</p>
-<a href="booking.html?service=Plumber">
-<button>Book</button>
-</a>
-</div>
-
-<div class="card">
-<h3>Woodwork</h3>
-<p>Expert carpenters</p>
-<a href="booking.html?service=Carpenter">
-<button>Book</button>
-</a>
-</div>
-
-<div class="card">
-<h3>Vehicle Repair</h3>
-<p>Local mechanics</p>
-<a href="booking.html?service=Mechanic">
-<button>Book</button>
-</a>
-</div>
-
-<div class="card">
-<h3>Home Painting</h3>
-<p>Professional painters</p>
-<a href="booking.html?service=Painter">
-<button>Book</button>
-</a>
-</div>
-
-<div class="card">
-<h3>Cleaning</h3>
-<p>House cleaning service</p>
-<a href="booking.html?service=House Cleaner">
-<button>Book</button>
-</a>
-</div>
-
+<div class="customers">
+<i class="fa-solid fa-users"></i>
+100+ Happy Customers
 </div>
 
 </div>
 
 
-<footer>
+<div class="hero-right">
 
-<p>© 2026 ArtisanConnect Platform</p>
+<img src="https://cdn-icons-png.flaticon.com/512/4149/4149645.png">
 
-<section style="padding:60px 40px;text-align:center;background:#f0f3fa;">
-
-<h2>Find Services Near You</h2>
-
-<p>Locate artisans in your area</p>
-
-<iframe
-src="https://www.google.com/maps?q=local+services+near+me&output=embed"
-width="90%"
-height="350"
-style="border:0;border-radius:10px;">
-</iframe>
+</div>
 
 </section>
 
-</footer>
+
+
+<section class="services">
+
+<h2>Explore <span>Our Services</span></h2>
+
+<div class="service-grid">
+
+
+<div class="service-card">
+<i class="fa-solid fa-wrench"></i>
+<h3>Plumbing</h3>
+<p>Fix leaks & pipes</p>
+</div>
+
+
+<div class="service-card">
+<i class="fa-solid fa-bolt"></i>
+<h3>Electrical</h3>
+<p>Wiring & Repairs</p>
+</div>
+
+
+<div class="service-card">
+<i class="fa-solid fa-hammer"></i>
+<h3>Carpentry</h3>
+<p>Furniture & Doors</p>
+</div>
+
+
+<div class="service-card">
+<i class="fa-solid fa-broom"></i>
+<h3>Cleaning</h3>
+<p>Home Cleaning</p>
+</div>
+
+
+<div class="service-card">
+<i class="fa-solid fa-paint-roller"></i>
+<h3>Painting</h3>
+<p>Interior & Exterior</p>
+</div>
+
+
+<div class="service-card">
+<i class="fa-solid fa-toolbox"></i>
+<h3>Appliance</h3>
+<p>Repair & Service</p>
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="stats">
+
+<div class="stat">
+<i class="fa-solid fa-users"></i>
+<h3>500+</h3>
+<p>Artisans</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-calendar"></i>
+<h3>2000+</h3>
+<p>Bookings</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-shield"></i>
+<h3>100%</h3>
+<p>Trusted</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-headset"></i>
+<h3>24/7</h3>
+<p>Support</p>
+</div>
+
+</section>
+
 
 </body>
 </html>
